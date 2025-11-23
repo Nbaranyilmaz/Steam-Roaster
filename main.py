@@ -65,11 +65,9 @@ class SteamRoasterApp(ctk.CTk):
         self.resizable(False, False)
         self.configure(fg_color=("#F0F0F0", "#050505"))
         
-        # BAŞLANGIÇ DİLİ İNGİLİZCE OLDU
         self.current_lang = "EN" 
         self.last_query = None
         
-        # İkon Ayarı
         icon_name = "logo.ico"
         icon_path = icon_name
         if hasattr(sys, "_MEIPASS"):
@@ -89,7 +87,6 @@ class SteamRoasterApp(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(3, weight=1)
 
-        # Header
         self.header_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.header_frame.grid(row=0, column=0, padx=40, pady=(30, 20), sticky="ew")
         
@@ -99,17 +96,13 @@ class SteamRoasterApp(ctk.CTk):
         self.controls_frame = ctk.CTkFrame(self.header_frame, fg_color="transparent")
         self.controls_frame.pack(side="right")
 
-        # Theme Switch
         self.theme_switch = ctk.CTkSwitch(self.controls_frame, text="DARK", command=self.toggle_theme, font=("Arial", 12, "bold"), progress_color="#333")
         self.theme_switch.select()
         self.theme_switch.pack(side="left", padx=15)
 
-        # Lang Switch (Artık EN başlıyor)
         self.lang_switch = ctk.CTkSwitch(self.controls_frame, text="EN", command=self.toggle_language, font=("Arial", 12, "bold"), progress_color="#444", fg_color=("gray", "#222"))
-        # self.lang_switch.select() # BU SATIRI SİLDİM, ARTIK SEÇİLİ DEĞİL (EN)
         self.lang_switch.pack(side="left")
 
-        # Input
         self.input_container = ctk.CTkFrame(self, fg_color=("#FFFFFF", "#111111"), corner_radius=15, border_width=1, border_color=("gray", "#222"))
         self.input_container.grid(row=1, column=0, padx=100, pady=10, sticky="ew")
         self.input_container.grid_columnconfigure(0, weight=1)
@@ -117,7 +110,6 @@ class SteamRoasterApp(ctk.CTk):
         self.entry_field = ctk.CTkEntry(self.input_container, height=50, border_width=0, fg_color=("#EBEBEB", "#1a1a1a"), text_color=("black", "white"), placeholder_text=APP_TEXTS["EN"]["input_placeholder"], font=("Arial", 14))
         self.entry_field.grid(row=0, column=0, padx=20, pady=20, sticky="ew")
 
-        # Profile Card
         self.profile_card = ctk.CTkFrame(self, fg_color=("#E0E0E0", "#161616"), corner_radius=15, border_width=1, border_color=("gray", "#333"))
         self.profile_card.grid(row=2, column=0, padx=200, pady=10, sticky="ew")
         self.profile_card.grid_remove()
@@ -128,11 +120,9 @@ class SteamRoasterApp(ctk.CTk):
         self.name_label = ctk.CTkLabel(self.profile_card, text="", font=("Arial", 18, "bold"))
         self.name_label.pack(side="left", pady=5)
 
-        # Button
         self.action_btn = ctk.CTkButton(self, text="ROAST", height=60, corner_radius=30, font=("Arial", 18, "bold"), fg_color=("black", "white"), text_color=("white", "black"), hover_color=("gray", "#e0e0e0"), command=self.on_submit)
         self.action_btn.grid(row=4, column=0, padx=150, pady=20, sticky="ew")
 
-        # Output
         self.output_box = ctk.CTkTextbox(self, corner_radius=15, fg_color=("#FFFFFF", "#080808"), text_color=("black", "#cccccc"), font=("Consolas", 15), border_width=0, wrap="word")
         self.output_box.grid(row=3, column=0, padx=50, pady=10, sticky="nsew")
         self.output_box.insert("0.0", "")
@@ -148,7 +138,6 @@ class SteamRoasterApp(ctk.CTk):
         self.theme_switch.configure(text=mode.upper())
 
     def toggle_language(self):
-        # Eğer switch açıksa (1) TR, kapalıysa (0) EN
         self.current_lang = "TR" if self.lang_switch.get() else "EN"
         self.lang_switch.configure(text=self.current_lang)
         self.action_btn.configure(text=APP_TEXTS[self.current_lang]["btn_action"])
@@ -265,3 +254,4 @@ class SteamRoasterApp(ctk.CTk):
 if __name__ == "__main__":
     app = SteamRoasterApp()
     app.mainloop()
+
